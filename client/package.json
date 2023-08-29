@@ -1,0 +1,11 @@
+{
+  "name": "airvoyage",
+  "uuid": "1f1ae7f0-aaeb-458d-92c5-3cc78a987492",
+  "creator": {
+    "version": "3.7.3"
+  },
+  "dependencies": {
+    "@walletconnect/client": "^1.8.0",
+    "@walletconnect/qrcode-modal": "^1.8.0"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "__version__": "1.3.5",
+  "log": {
+    "level": 4
+  },
+  "common": {
+    "buildPath": "project://build",
+    "outputName": "web-mobile",
+    "mainBundleCompressionType": "merge_dep",
+    "platform": "web-mobile",
+    "md5Cache": true,
+    "useSplashScreen": false
+  },
+  "BuildTaskManager": {
+    "taskMap": {
+      "1684137541700": {
+        "type": "build",
+        "id": "1684137541700",
+        "progress": 1,
+        "state": "success",
+        "stage": "build",
+        "message": "5-15-2023 16:02:21 build success in 199770 ms!",
+        "options": {
+          "name": "airvoyage",
+          "platform": "web-desktop",
+          "buildPath": "project://build",
+          "debug": false,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "polyfills": {
+            "asyncFunctions": true
+          },
+          "experimentalEraseModules": false,
+          "useBuiltinServer": false,
+          "mainBundleIsRemote": false,
+          "mainBundleCompressionType": "merge_dep",
+          "useSplashScreen": true,
+          "packAutoAtlas": true,
+          "startScene": "fb9fa781-3840-4d6b-9359-b2cde4c2a020",
+          "outputName": "web-desktop",
+          "scenes": [
+            {
+              "url": "db://assets/scene/main.scene",
+              "uuid": "fb9fa781-3840-4d6b-9359-b2cde4c2a020",
+              "inBundle": false
+            }
+          ],
+          "web-mobile": [],
+          "packages": {},
+          "__version__": "1.3.5",
+          "web-desktop": []
+        },
+        "time": "5-15-2023 15:59",
+        "dirty": false
+      },
+      "1684139100270": {
+        "type": "build",
+        "id": "1684139100270",
+        "progress": 1,
+        "state": "success",
+        "stage": "build",
+        "message": "2023-5-22 22:20:07 build success in 40960 ms!",
+        "options": {
+          "name": "airvoyage",
+          "platform": "web-mobile",
+          "buildPath": "project://build",
+          "debug": false,
+          "md5Cache": true,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "polyfills": {
+            "asyncFunctions": true
+          },
+          "experimentalEraseModules": false,
+          "useBuiltinServer": false,
+          "mainBundleIsRemote": false,
+          "mainBundleCompressionType": "merge_dep",
+          "useSplashScreen": false,
+          "packAutoAtlas": true,
+          "startScene": "fb9fa781-3840-4d6b-9359-b2cde4c2a020",
+          "outputName": "web-mobile",
+          "scenes": [
+            {
+              "url": "db://assets/scene/main.scene",
+              "uuid": "fb9fa781-3840-4d6b-9359-b2cde4c2a020",
+              "inBundle": false
+            }
+          ],
+          "web-desktop": [],
+          "packages": {},
+          "__version__": "1.3.5",
+          "web-mobile": []
+        },
+        "time": "5-22-2023 22:19",
+        "dirty": false
+      }
+    }
+  }
+}
