@@ -21485,7 +21485,7 @@ try {
 } catch (error) {}
 
 module.exports = {
-BaseContract,
+    BaseContract,
     BigNumber,
     Contract,
     ContractFactory,
