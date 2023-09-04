@@ -4,7 +4,7 @@ import { GameEventWalletDisconnect } from "../events/GameEventWalletDisconnect";
 import { contractData } from "./ContractData";
 import { registerDataModel } from "./DataRegister";
 //@ts-ignore
-import { ethers } from "../../../libs/ethers.js";
+import ethersLib from "../../../libs/ethers.js";
 import { GameMap } from "../components/Main/GameMap";
 import { Toast } from "../components/Toast/Toast";
 import { GameEventContractAirVoyageGameFinished } from "../contracts/events/GameEventContractAirVoyageGameFinished";
@@ -12,6 +12,9 @@ import { GameEventGameOpened } from "../events/GameEventGameOpened";
 import { gameEventListenerManager } from "../events/listeners/GameEventListenerManager";
 import { GameDTO } from "./dto/GameDTO";
 import { gameAccountData } from "./GameAccountData";
+
+const { ethers } = ethersLib;
+
 export class GameData extends DataModelBase {
   private _gaming: boolean = false;
   private _currentGameId: any = GameData.INVALID_GAME_ID;

@@ -8,7 +8,8 @@ import { registerDataModel } from "./DataRegister";
 import { walletData } from "./WalletData";
 import { PlayerSimpleDTO } from "./dto/PlayerSimpleDTO";
 //@ts-ignore
-import { ethers } from "../../../libs/ethers.js";
+import ethersLib from "../../../libs/ethers.js";
+const { ethers } = ethersLib;
 interface IAccountCache {
   address: string;
   secret: string;

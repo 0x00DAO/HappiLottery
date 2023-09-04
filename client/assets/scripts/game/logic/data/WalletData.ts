@@ -2,7 +2,7 @@ import { AfterDataLoad } from "../../core/model/DataDecorators";
 import { DataModelBase } from "../../core/model/DataModelBase";
 import { registerDataModel } from "./DataRegister";
 //@ts-ignore
-import { ethers } from "../../../libs/ethers.js";
+import ethersLib from "../../../libs/ethers.js";
 import { eventBus } from "../../core/event/EventBus";
 import { StringUtil } from "../../core/utils/StringUtil";
 import { Toast } from "../components/Toast/Toast";
@@ -12,6 +12,7 @@ import { GameEventWalletChainChanged } from "../events/GameEventWalletChainChang
 import { GameEventWalletConnected } from "../events/GameEventWalletConnected";
 import { GameEventWalletDisconnect } from "../events/GameEventWalletDisconnect";
 
+const { ethers } = ethersLib;
 interface WalletCache {
   address: string;
   chainId: number;

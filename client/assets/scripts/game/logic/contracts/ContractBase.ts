@@ -1,8 +1,8 @@
 //@ts-ignore
-import { ethers } from "../../../libs/ethers.js";
+import ethersLib from "../../../libs/ethers.js";
 
 const { ethereum } = window as any;
-
+const { ethers } = ethersLib;
 export abstract class ContractBase {
   public readonly contractABI: any;
 
