@@ -70,6 +70,8 @@ contract AirVoyageGameEntity is
     // Define a mapping table to store all games
     mapping(uint256 => AirVoyageGameLib.Game) internal games;
 
+    error GameDoesNotExist();
+
     // Define a function to create a new game
     function createGame(
         uint256 gameId,
@@ -88,7 +90,10 @@ contract AirVoyageGameEntity is
         uint256 gameId
     ) public view returns (AirVoyageGameLib.Game memory) {
         AirVoyageGameLib.Game memory _game = games[gameId];
-        require(_game.gameId != 0, "Game does not exist");
+        if (_game.gameId == 0) {
+            revert GameDoesNotExist();
+        }
+        // require(_game.gameId != 0, "Game does not exist");
         return _game;
     }
 
@@ -96,7 +101,10 @@ contract AirVoyageGameEntity is
         uint256 gameId
     ) internal view returns (AirVoyageGameLib.Game storage) {
         AirVoyageGameLib.Game storage _game = games[gameId];
-        require(_game.gameId != 0, "Game does not exist");
+        if (_game.gameId == 0) {
+            revert GameDoesNotExist();
+        }
+        // require(_game.gameId != 0, "Game does not exist");
         return _game;
     }
 
@@ -192,6 +200,10 @@ contract AirVoyageGameEntity is
         checkGameIsPlaying(gameId);
         // Set the current player
         game.currentPlayer = nextPlayer;
+        // update the player last operation time
+        AirVoyageGamePlayer.GamePlayer storage _gamePlayer = game
+            .getCurrentPlayer();
+        _gamePlayer.setLastOperationTimeAsBlockTime();
     }
 
     function setRollDice(

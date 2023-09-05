@@ -17,6 +17,7 @@ library AirVoyageGamePlayer {
         uint8 dice;
         GamePlayerStatus status;
         uint256 score;
+        uint256 lastOperationTime;
     }
 
     function init(GamePlayer storage self, address addr) internal {
@@ -45,5 +46,22 @@ library AirVoyageGamePlayer {
         GamePlayerStatus status
     ) internal {
         self.status = status;
+    }
+
+    function setLastOperationTimeAsBlockTime(GamePlayer storage self) internal {
+        self.lastOperationTime = block.timestamp;
+    }
+
+    function setLastOperationTime(
+        GamePlayer storage self,
+        uint256 lastOperationTime
+    ) internal {
+        self.lastOperationTime = lastOperationTime;
+    }
+
+    function getLastOperationTime(
+        GamePlayer memory self
+    ) internal pure returns (uint256) {
+        return self.lastOperationTime;
     }
 }
