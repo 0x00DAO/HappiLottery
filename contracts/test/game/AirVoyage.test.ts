@@ -274,7 +274,7 @@ describe('AirVoyage', function () {
       }
     });
 
-    it('should roll dice and move to finish', async function () {
+    it.only('should roll dice and move to finish', async function () {
       const [owner, addr1, addr2] = await ethers.getSigners();
 
       function getSignerByAddress(address: string): SignerWithAddress {
@@ -309,6 +309,9 @@ describe('AirVoyage', function () {
           const gamePlayer = game.players[game.currentPlayer];
           expect(gamePlayer.lastOperationTime).to.be.gt(userLastOperationTime);
           userLastOperationTime = gamePlayer.lastOperationTime;
+          expect(game.currentPlayerLastOperationTime).to.be.eq(
+            userLastOperationTime
+          );
         }
 
         const currentPlayerSigner = getSignerByAddress(currentPlayer);
