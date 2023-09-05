@@ -196,6 +196,7 @@ contract AirVoyage is
         address owner = _msgSender();
         getAirVoyageGameEntity().createGame(gameId, owner);
 
+        require(_waitingGames.length() == 0, "There are games waiting");
         // Add the game to the waiting list
         _waitingGames.add(gameId);
 

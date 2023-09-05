@@ -144,6 +144,20 @@ describe('AirVoyage', function () {
         'You have already participated in the game'
       );
     });
+
+    it('should not create a new game if the game is not finished', async function () {
+      const [owner, addr1, addr2] = await ethers.getSigners();
+
+      await expect(airVoyageContract.createGame({ value: bonusValue }))
+        .to.emit(airVoyageContract, 'GameCreated')
+        .withArgs(initialGameId, owner.address);
+
+      const airVoyageContractB = airVoyageContract.connect(addr1);
+      // await airVoyageContractB.createGame({ value: bonusValue });
+      await expect(
+        airVoyageContractB.createGame({ value: bonusValue })
+      ).to.be.revertedWith('There are games waiting');
+    });
   });
 
   describe('joinGame', function () {
