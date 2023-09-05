@@ -1,6 +1,6 @@
 import { Label, _decorator } from "cc";
 //@ts-ignore
-import { ethers } from "../../../../libs/ethers.js";
+import ethersLib from "../../../../libs/ethers.js";
 import { AutoLockedAsync } from "../../../core/model/DataDecorators";
 import { StringUtil } from "../../../core/utils/StringUtil";
 import { gameAccountData } from "../../data/GameAccountData";
@@ -10,6 +10,8 @@ import { onAddedPromise } from "../../../core/layout/LayerHelper";
 import { Toast } from "../Toast/Toast";
 
 const { menu, ccclass, property } = _decorator;
+const { ethers } = ethersLib;
+
 @ccclass("BonusPopUp")
 @menu("game/logic/components/BonusPopUp")
 export class BonusPopUp extends LayoutCom {
