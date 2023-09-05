@@ -31,6 +31,7 @@ library AirVoyageGameLib {
         uint256 currentPlayer; // The index of the player who is currently playing
         address winner; // The wallet address of the winner
         GameStatus status; // The status of the game
+        uint256 currentPlayerLastOperationTime; // The last operation time of the current player
     }
 
     function getGamePiece(

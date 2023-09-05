@@ -71,6 +71,8 @@ contract AirVoyageGameEntity is
     mapping(uint256 => AirVoyageGameLib.Game) internal games;
 
     error GameDoesNotExist();
+    error GameIsNotWaitingForPlayers();
+    error GameIsNotPlaying();
 
     // Define a function to create a new game
     function createGame(
@@ -145,10 +147,13 @@ contract AirVoyageGameEntity is
     ) public whenNotPaused onlyRole(COMPONENT_WRITE_ROLE) {
         AirVoyageGameLib.Game storage game = _getGame(gameId);
         // Check whether the game is waiting for players
-        require(
-            game.status == AirVoyageGameLib.GameStatus.Waiting,
-            "Game is not waiting for players"
-        );
+        if (game.status != AirVoyageGameLib.GameStatus.Waiting) {
+            revert GameIsNotWaitingForPlayers();
+        }
+        // require(
+        //     game.status == AirVoyageGameLib.GameStatus.Waiting,
+        //     "Game is not waiting for players"
+        // );
         // Check whether the player is gte 2
         require(
             game.getPlayerCount() >= 2,
@@ -185,10 +190,13 @@ contract AirVoyageGameEntity is
     function checkGameIsPlaying(uint256 gameId) internal view {
         AirVoyageGameLib.Game storage game = _getGame(gameId);
         // Check whether the game is playing
-        require(
-            game.status == AirVoyageGameLib.GameStatus.Playing,
-            "Game is not playing"
-        );
+        if (game.status != AirVoyageGameLib.GameStatus.Playing) {
+            revert GameIsNotPlaying();
+        }
+        // require(
+        //     game.status == AirVoyageGameLib.GameStatus.Playing,
+        //     "Game is not playing"
+        // );
     }
 
     function setNextPlayer(
@@ -204,6 +212,8 @@ contract AirVoyageGameEntity is
         AirVoyageGamePlayer.GamePlayer storage _gamePlayer = game
             .getCurrentPlayer();
         _gamePlayer.setLastOperationTimeAsBlockTime();
+        game.currentPlayerLastOperationTime = _gamePlayer
+            .getLastOperationTime();
     }
 
     function setRollDice(
