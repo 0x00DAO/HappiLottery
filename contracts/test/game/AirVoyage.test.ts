@@ -274,7 +274,7 @@ describe('AirVoyage', function () {
       }
     });
 
-    it.only('should roll dice and move to finish', async function () {
+    it('should roll dice and move to finish', async function () {
       const [owner, addr1, addr2] = await ethers.getSigners();
 
       function getSignerByAddress(address: string): SignerWithAddress {
@@ -460,6 +460,75 @@ describe('AirVoyage', function () {
 
         expect(currentPlayerAfterRoll).to.not.equal(currentPlayer);
       }
+    });
+
+    it('should roll dice and move if timeout', async function () {
+      const [owner, addr1, addr2] = await ethers.getSigners();
+
+      await airVoyageContract.createGame({ value: bonusValue });
+      //join game
+      await airVoyageContract
+        .connect(addr1)
+        .joinGame(initialGameId, { value: bonusValue });
+
+      for (let i = 0; i < 4; i++) {
+        await airVoyageGameViewSystem
+          .getGamePiece(initialGameId, i)
+          .then((x: any) => {
+            // console.log(i, x);
+          });
+      }
+      const currentPlayer = await airVoyageGameViewSystem.getCurrentPlayer(
+        initialGameId
+      );
+      //snapshot
+      const snapshotId = await ethers.provider.send('evm_snapshot', []);
+
+      for (let i = 0; i < 4; i++) {
+        const currentPlayerSigner =
+          currentPlayer === owner.address ? owner : addr1;
+
+        const game = await airVoyageGameViewSystem.getGame(initialGameId);
+        console.log(
+          `step: ${i}, currentPlayer: ${currentPlayer}, currentPlayerIndex:${game.currentPlayer}`
+        );
+
+        await expect(
+          airVoyageContract.connect(currentPlayerSigner).rollDiceAndMovePiece(0)
+        )
+          .to.emit(airVoyageContract, 'DiceRolled')
+          .withArgs(
+            initialGameId,
+            currentPlayerSigner.address,
+            async (x: BigNumber) => console.log(x)
+          )
+          .to.emit(airVoyageContract, 'PieceMoved')
+          .withArgs(
+            initialGameId,
+            currentPlayerSigner.address,
+            async (x: any) => console.log(`pieceIndex ${x}`),
+            async (x: any) => console.log(`from ${x}`),
+            async (x: any) => console.log(`to ${x}`)
+          );
+
+        const isFinished = await airVoyageGameViewSystem.isGameFinished(
+          initialGameId
+        );
+        console.log('isFinished', isFinished);
+
+        const currentPlayerAfterRoll =
+          await airVoyageGameViewSystem.getCurrentPlayer(initialGameId);
+
+        expect(currentPlayerAfterRoll).to.not.equal(currentPlayer);
+
+        //block time add 120s
+        await ethers.provider.send('evm_increaseTime', [120]);
+        //mine
+        await ethers.provider.send('evm_mine', []);
+      }
+
+      //restore
+      await ethers.provider.send('evm_revert', [snapshotId]);
     });
   });
 });

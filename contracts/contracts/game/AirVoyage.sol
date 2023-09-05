@@ -321,6 +321,10 @@ contract AirVoyage is
         // Get the game ID
         uint256 _gameId = players[_player].gameId;
 
+        // skip if the current player is timeout
+        bool skiped = getAirVoyageGameMoveSystem()
+            .turnToNextPlayerIfCurrentPlayerTimeout(_gameId, _player);
+
         // Roll the dice (1-6)
         uint8 _dice = uint8((randomByGameId(_gameId) % 6) + 1);
         getAirVoyageGameEntity().setRollDice(_gameId, _player, _dice);

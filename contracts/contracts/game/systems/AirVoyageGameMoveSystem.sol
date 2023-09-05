@@ -232,4 +232,28 @@ contract AirVoyageGameMoveSystem is
             return true;
         }
     }
+
+    function turnToNextPlayerIfCurrentPlayerTimeout(
+        uint256 gameId_,
+        address player_
+    ) public whenNotPaused onlyRole(SYSTEM_INTERNAL_ROLE) returns (bool) {
+        // Get the game
+        AirVoyageGameLib.Game memory _game = getGame(gameId_);
+        if (_game.status != AirVoyageGameLib.GameStatus.Playing) {
+            return false;
+        }
+        AirVoyageGamePlayer.GamePlayer memory _currentGamePlayer = _game
+            .players[_game.currentPlayer];
+
+        // Check whether the player is playing
+        if (_currentGamePlayer.addr == player_) {
+            return false;
+        }
+        // 60 seconds timeout
+        if (_currentGamePlayer.getLastOperationTime() + 60 > block.timestamp) {
+            return false;
+        }
+
+        return turnToNextPlayer(gameId_);
+    }
 }
