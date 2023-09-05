@@ -344,6 +344,14 @@ describe('AirVoyage', function () {
       const reward = await airVoyageGameBonusSystemContract.bonusOf(
         game.winner
       );
+      const winnerSigner = getSignerByAddress(game.winner);
+      await airVoyageGameBonusSystemContract
+        .connect(winnerSigner)
+        .getBonus()
+        .then((v: any) => {
+          expect(v).to.equal(reward);
+        });
+
       await airVoyageGameBonusSystemContract
         .availableAmount()
         .then((v: BigNumber) => {
