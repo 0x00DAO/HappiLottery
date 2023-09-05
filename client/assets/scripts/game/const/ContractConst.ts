@@ -1,11 +1,11 @@
 export const CONTRACT_ADDRESS_MUMBAI = {
-    AirVoyage: '0xA5cC0422ef56e1e66A1B6100cD73061592B58b13',
-    AirVoyageGameViewSystem: '0xf5d1e1aFfD00894b26Be2A470dc4005ACE8974AC',
-    AirVoyageGameBonusSystem: '0x84B7F92c0187eee470fd85028C15905BD2d4FcdF',
+  AirVoyage: "0x4e312Ebb98306ABf7D2C50fFbBf7021FBFFf4E13",
+  AirVoyageGameViewSystem: "0x35F45aA48EF715571bbd0B07ed195405b8afE888",
+  AirVoyageGameBonusSystem: "0xC13B9eC6Bd31fDdd0DfB46137E32994e6Da82347",
 };
 
 export const CONTRACT_ADDRESS_POLYGON = {
-    AirVoyage: '',
-    AirVoyageGameViewSystem: '',
-    AirVoyageGameBonusSystem: '',
+  AirVoyage: "",
+  AirVoyageGameViewSystem: "",
+  AirVoyageGameBonusSystem: "",
 };
