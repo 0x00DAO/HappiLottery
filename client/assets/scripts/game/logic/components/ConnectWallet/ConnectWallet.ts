@@ -19,10 +19,7 @@ export class ConnectWallet extends GameObject {
   private set txt(value: string) {
     let str = "connect wallet";
     if (!StringUtil.isEmpty(value)) {
-      str = `${value.substring(0, 4)}...${value.substring(
-        value.length - 4,
-        value.length
-      )}`;
+      str = StringUtil.shortAddress(value);
     }
     this.txtLabel.string = str;
   }
