@@ -11,6 +11,7 @@ import { GameEventWalletAccountChanged } from "../events/GameEventWalletAccountC
 import { GameEventWalletChainChanged } from "../events/GameEventWalletChainChanged";
 import { GameEventWalletConnected } from "../events/GameEventWalletConnected";
 import { GameEventWalletDisconnect } from "../events/GameEventWalletDisconnect";
+import { NETWORK_NAME } from "../../const/ContractConst";
 
 const { ethers } = ethersLib;
 interface WalletCache {
@@ -128,7 +129,7 @@ export class WalletData extends DataModelBase {
     const idx = ChainIds.findIndex((id) => id === chainId);
     if (idx < 0) {
       Toast.showMessage(
-        `chain ${chainId} is not supported, please switch to Polygon`
+        `chain ${chainId} is not supported, please switch to ${NETWORK_NAME}`
       );
       return Promise.resolve();
     }

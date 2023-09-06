@@ -13,6 +13,9 @@ export class TokenButton extends GameObject {
   @AutoLockedAsync
   private async onCoinButtonClicked() {
     if (StringUtil.isEmpty(gameAccountData.address)) {
+      await gameAccountData.buildAccount();
+    }
+    if (StringUtil.isEmpty(gameAccountData.address)) {
       Toast.showMessage("Please connect wallet");
       return Promise.resolve();
     }

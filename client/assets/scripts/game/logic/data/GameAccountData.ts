@@ -9,6 +9,7 @@ import { walletData } from "./WalletData";
 import { PlayerSimpleDTO } from "./dto/PlayerSimpleDTO";
 //@ts-ignore
 import ethersLib from "../../../libs/ethers.js";
+import { Toast } from "../components/Toast/Toast";
 const { ethers } = ethersLib;
 interface IAccountCache {
   address: string;
@@ -73,22 +74,30 @@ export class GameAccountData extends DataModelBase {
       return Promise.resolve();
     }
     const signer = walletData.provider.getSigner();
-    const message = ethers.utils.solidityKeccak256(
-      ["address", "string"],
-      [walletData.address, "airvoyage"]
-    );
-    const hash = ethers.utils.arrayify(message);
-    const signature = await signer.signMessage(hash);
-    const { r, s, v } = ethers.utils.splitSignature(signature);
-    const secret = `${s.substring(49, s.length)}${r.substring(
-      2,
-      17
-    )}${s.substring(2, 17)}${r.substring(49, r.length)}`;
-    const wallet = new ethers.Wallet(secret);
-    this.data.secret = EncryptUtil.encryptWithKey(secret, wallet.address);
-    this.data.address = wallet.address;
+    if (StringUtil.isEmpty(walletData.address) || !signer) {
+      return Promise.resolve();
+    }
 
-    this.saveData();
+    try {
+      const message = ethers.utils.solidityKeccak256(
+        ["address", "string"],
+        [walletData.address, "airvoyage"]
+      );
+      const hash = ethers.utils.arrayify(message);
+      const signature = await signer.signMessage(hash);
+      const { r, s, v } = ethers.utils.splitSignature(signature);
+      const secret = `${s.substring(49, s.length)}${r.substring(
+        2,
+        17
+      )}${s.substring(2, 17)}${r.substring(49, r.length)}`;
+      const wallet = new ethers.Wallet(secret);
+      this.data.secret = EncryptUtil.encryptWithKey(secret, wallet.address);
+      this.data.address = wallet.address;
+
+      this.saveData();
+    } catch (e) {
+      Toast.showMessage("Build Arcade Accounts failed!");
+    }
   }
 
   public async getBonus(): Promise<any> {
