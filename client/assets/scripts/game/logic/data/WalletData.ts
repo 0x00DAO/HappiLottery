@@ -68,6 +68,9 @@ export class WalletData extends DataModelBase {
   @AfterDataLoad
   async loadData() {
     this.registerProviderEvent();
+    if (!StringUtil.isEmpty(this.data.address) && this.data.chainId === -1) {
+      this.disconnect();
+    }
   }
 
   private registerProviderEvent() {

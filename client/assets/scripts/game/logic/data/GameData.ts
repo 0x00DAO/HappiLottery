@@ -36,7 +36,7 @@ export class GameData extends DataModelBase {
   }
 
   public get minGameFeePerRound(): any {
-    return ethers.utils.parseEther(`${this.stakeToken * 4}`);
+    return ethers.utils.parseEther(`${this.stakeToken * 200}`);
   }
 
   public get gameMap(): GameMap {
