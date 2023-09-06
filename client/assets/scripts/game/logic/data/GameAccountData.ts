@@ -10,6 +10,9 @@ import { PlayerSimpleDTO } from "./dto/PlayerSimpleDTO";
 //@ts-ignore
 import ethersLib from "../../../libs/ethers.js";
 import { Toast } from "../components/Toast/Toast";
+import { eventBus } from "../../core/event/EventBus";
+import { GameEventBuildArcadeAccount } from "../events/GameEventBuildArcadeAccount";
+import { GameEventWalletAccountChanged } from "../events/GameEventWalletAccountChanged";
 const { ethers } = ethersLib;
 interface IAccountCache {
   address: string;
@@ -51,6 +54,11 @@ export class GameAccountData extends DataModelBase {
     this.saveData();
   }
 
+  @OnEvent(GameEventWalletAccountChanged.event)
+  private async onAccountChanged() {
+    await this.buildAccount(true);
+  }
+
   public async getPlayerSimple(
     address?: string
   ): Promise<PlayerSimpleDTO | null> {
@@ -66,8 +74,9 @@ export class GameAccountData extends DataModelBase {
     return player;
   }
 
-  public async buildAccount() {
+  public async buildAccount(forceBuild: boolean = false) {
     if (
+      !forceBuild &&
       !StringUtil.isEmpty(this.data.address) &&
       !StringUtil.isEmpty(this.data.secret)
     ) {
@@ -95,6 +104,8 @@ export class GameAccountData extends DataModelBase {
       this.data.address = wallet.address;
 
       this.saveData();
+
+      eventBus.emit(GameEventBuildArcadeAccount.event);
     } catch (e) {
       Toast.showMessage("Build Arcade Accounts failed!");
     }

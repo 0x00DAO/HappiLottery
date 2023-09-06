@@ -74,9 +74,9 @@ export class WalletData extends DataModelBase {
     if (!this.hasProvider) {
       return;
     }
-    this.ethereum.on("accountsChanged", (accounts: string[]) =>
-      eventBus.emit(GameEventWalletAccountChanged.event, accounts)
-    );
+    this.ethereum.on("accountsChanged", (accounts: string[]) => {
+      eventBus.emit(GameEventWalletAccountChanged.event, accounts);
+    });
     this.ethereum.on("chainChanged", (chainId: string) =>
       eventBus.emit(GameEventWalletChainChanged.event, chainId)
     );

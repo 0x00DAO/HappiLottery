@@ -18,6 +18,7 @@ import { GameEventRechargeBalance } from "../../events/GameEventRechargeBalance"
 import { GameEventWalletConnected } from "../../events/GameEventWalletConnected";
 import { GasRecharge } from "../GasRecharge/GasRecharge";
 import { Toast } from "../Toast/Toast";
+import { GameEventBuildArcadeAccount } from "../../events/GameEventBuildArcadeAccount";
 const { menu, ccclass, property } = _decorator;
 
 @ccclass("GameRoll")
@@ -232,6 +233,15 @@ export class GameRoll extends GameObject {
 
   @OnEvent(GameEventRechargeBalance.event)
   private async onBalanceRefreshed() {
+    await this.findAccountBalance();
+  }
+
+  @OnEvent(GameEventBuildArcadeAccount.event)
+  private async onArcadeAccountBuilded() {
+    await this.findAccountBalance();
+  }
+
+  private async findAccountBalance() {
     if (StringUtil.isEmpty(gameAccountData.address)) {
       return Promise.resolve();
     }
