@@ -58,6 +58,9 @@ export class GameRoll extends GameObject {
       this.txtLabel.string =
         GamePlayerStatus.Playing === value ? "Roll" : "Join";
     }
+    if (this.txtLabel.string === "Wait") {
+      Toast.showMessage("Please wait for your opponent to join the game.");
+    }
   }
 
   async load() {
@@ -111,15 +114,12 @@ export class GameRoll extends GameObject {
     if (!gameAccountData.hasAccount) {
       await gameAccountData.buildAccount();
     }
-
     if (gameData.currentGame && gameData.currentGame.me) {
       Toast.showMessage("You are in a game now");
       return Promise.resolve();
     }
-
     // get my status
     const player = await gameAccountData.getPlayerSimple();
-
     try {
       if (
         !player ||
@@ -192,7 +192,7 @@ export class GameRoll extends GameObject {
       return Promise.resolve();
     }
     if (!gameData.currentGame.isPlaying) {
-      Toast.showMessage("Game is not started, you need an opponent");
+      Toast.showMessage("Game hasn't started, please wait for your opponent.");
       return Promise.resolve();
     }
 
