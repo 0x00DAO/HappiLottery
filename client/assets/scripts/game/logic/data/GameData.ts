@@ -74,7 +74,7 @@ export class GameData extends DataModelBase {
         gameID
       );
       game = GameDTO.fillWith({
-        gameId: data.gameId.toString(),
+        gameId: data.gameId,
         currentPlayer: data.currentPlayer.toString(),
         owner: data.owner,
         winner: data.winner,
