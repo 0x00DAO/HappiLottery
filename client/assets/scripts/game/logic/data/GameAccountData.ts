@@ -59,10 +59,7 @@ export class GameAccountData extends DataModelBase {
       const data = await contractData.airVoyageContract.players(
         address ?? this.address
       );
-      player = PlayerSimpleDTO.fillWith({
-        seatIndex: data.seatIndex,
-        gameId: data.gameId.toString(),
-      });
+      player = PlayerSimpleDTO.fillWith(data);
     } catch (e) {
       console.error(e);
     }

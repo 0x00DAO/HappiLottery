@@ -73,31 +73,7 @@ export class GameData extends DataModelBase {
       const data = await contractData.airVoyageGameViewSystemContract.getGame(
         gameID
       );
-      game = GameDTO.fillWith({
-        gameId: data.gameId,
-        currentPlayer: data.currentPlayer.toString(),
-        owner: data.owner,
-        winner: data.winner,
-        status: data.status,
-        players: data.players.map((player: any) => {
-          return {
-            addr: player.addr,
-            dice: player.dice,
-            status: player.status,
-            score: player.score.toString(),
-            lastOperationTime: parseInt(player.lastOperationTime.toString()),
-          };
-        }),
-        pieces: data.pieces.map((piece: any) => {
-          return {
-            player: piece.player,
-            seatIndex: piece.seatIndex,
-            localPosition: piece.localPosition,
-            globalPosition: piece.globalPosition,
-            status: piece.status,
-          };
-        }),
-      });
+      game = GameDTO.fillWith(data);
       this.gameMap.clearAllPlanes();
       game.initAllAirplanes();
       this._currentGame = game;

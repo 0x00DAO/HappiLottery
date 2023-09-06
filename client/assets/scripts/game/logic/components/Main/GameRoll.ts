@@ -203,7 +203,7 @@ export class GameRoll extends GameObject {
     }
 
     this.startStepUpdate();
-    Toast.showLoading();
+    Toast.showLoading("Dice Rolling...");
 
     try {
       await gameData.rollDice();
