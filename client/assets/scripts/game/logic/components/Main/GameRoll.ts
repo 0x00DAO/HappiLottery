@@ -52,7 +52,9 @@ export class GameRoll extends GameObject {
       if (time > 60) {
         this.waitingTimeLeftLabel.string = "It's your turn!";
       } else {
-        this.waitingTimeLeftLabel.string = StringUtil.formatTime(time);
+        this.waitingTimeLeftLabel.string = `wait: ${StringUtil.formatTime(
+          time
+        )}`;
         this.schedule(this.countdownRollWaitTime, 1);
       }
     }
