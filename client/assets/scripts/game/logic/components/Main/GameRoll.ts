@@ -199,6 +199,11 @@ export class GameRoll extends GameObject {
 
     const isMyTurn = await gameData.currentGame.isMyTurn();
     if (!isMyTurn) {
+      console.log(
+        "上次移动",
+        gameData.currentGame.me.lastOpTime,
+        new Date().getTime() / 1000 - gameData.currentGame.me.lastOpTime
+      );
       Toast.showMessage("It's not your turn");
       return Promise.resolve();
     }

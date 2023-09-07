@@ -9,7 +9,7 @@ export class PlayerDTO extends BaseDTO {
   dice: any = 0;
   status: GamePlayerStatus = GamePlayerStatus.Idle;
   score: any = 0;
-  lastOperationTime: any = 0;
+  lastOperationTime: any = null;
 
   public get airplanes(): AirPlane[] {
     return this.myPieces.map((piece: PieceDTO) => piece.airplane);
@@ -17,6 +17,14 @@ export class PlayerDTO extends BaseDTO {
 
   public get isPlaying(): boolean {
     return this.status === GamePlayerStatus.Playing;
+  }
+
+  public get lastOpTime(): number {
+    if (!this.lastOperationTime) {
+      return 0;
+    }
+
+    return parseInt(this.lastOperationTime.toString());
   }
 
   public get isValid(): boolean {
