@@ -21,7 +21,7 @@ export class PlayerDTO extends BaseDTO {
 
   public get lastOpTime(): number {
     if (!this.lastOperationTime) {
-      return 0;
+      return -1;
     }
 
     return parseInt(this.lastOperationTime.toString());

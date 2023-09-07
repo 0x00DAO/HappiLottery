@@ -57,7 +57,19 @@ export class GameDTO extends BaseDTO {
 
   public async isMyTurn(): Promise<boolean> {
     const player = await gameData.getCurrentPlayer();
-    return player !== null && player === gameAccountData.address;
+    if (!player) {
+      return false;
+    }
+    if (player === gameAccountData.address) {
+      return true;
+    }
+    const me = this.me;
+    if (!me) {
+      return false;
+    }
+    const lastTime =
+      parseInt((new Date().getTime() / 1000).toString()) - me.lastOpTime;
+    return lastTime > 60;
   }
 
   public destroyAllAirplanes() {

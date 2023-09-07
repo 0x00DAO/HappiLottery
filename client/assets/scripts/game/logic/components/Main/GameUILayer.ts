@@ -5,7 +5,6 @@ import { StringUtil } from "../../../core/utils/StringUtil";
 import { OnEvent } from "../../../core/event/decorators/OnEventDecorator";
 import { GameEventBuildArcadeAccount } from "../../events/GameEventBuildArcadeAccount";
 import { GameEventContractAirVoyageGameFinished } from "../../contracts/events/GameEventContractAirVoyageGameFinished";
-import { GameEventContractAirVoyageGameStarted } from "../../contracts/events/GameEventContractAirVoyageGameStarted";
 import { ViewUtil } from "../../../core/utils/ViewUtil";
 import { Textures } from "../../enum/Textures";
 import { GameEventGameOpened } from "../../events/GameEventGameOpened";

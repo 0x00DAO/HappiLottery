@@ -12,4 +12,23 @@ export class StringUtil {
       address.length
     )}`;
   }
+
+  static formatTime(seconds: number): string {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+
+    const hoursString = hours.toString();
+    const minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+    const secondsString =
+      remainingSeconds < 10
+        ? `0${remainingSeconds}`
+        : remainingSeconds.toString();
+
+    if (hours >= 100) {
+      return `${hoursString}:${minutesString}:${secondsString}`;
+    }
+
+    return `${hoursString.padStart(2, "0")}:${minutesString}:${secondsString}`;
+  }
 }

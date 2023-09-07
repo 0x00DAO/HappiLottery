@@ -19,6 +19,7 @@ import { GameEventWalletConnected } from "../../events/GameEventWalletConnected"
 import { GasRecharge } from "../GasRecharge/GasRecharge";
 import { Toast } from "../Toast/Toast";
 import { GameEventBuildArcadeAccount } from "../../events/GameEventBuildArcadeAccount";
+import { GameEventContractAirVoyagePieceMoved } from "../../contracts/events/GameEventContractAirVoyagePieceMoved";
 const { menu, ccclass, property } = _decorator;
 
 @ccclass("GameRoll")
@@ -37,8 +38,24 @@ export class GameRoll extends GameObject {
   @property(Label)
   private balanceLabel: Label = null!;
 
+  @property(Label)
+  private waitingTimeLeftLabel: Label = null!;
+
   private set balance(balance: string) {
     this.balanceLabel.string = `${Number(balance).toFixed(5)}`;
+  }
+
+  private set waitingTimeLeft(time: number) {
+    this.waitingTimeLeftLabel.node.active = time >= 0;
+    this.unschedule(this.countdownRollWaitTime);
+    if (this.waitingTimeLeftLabel.node.active) {
+      if (time > 60) {
+        this.waitingTimeLeftLabel.string = "It's your turn!";
+      } else {
+        this.waitingTimeLeftLabel.string = StringUtil.formatTime(time);
+        this.schedule(this.countdownRollWaitTime, 1);
+      }
+    }
   }
 
   private set step(step: number) {
@@ -69,6 +86,15 @@ export class GameRoll extends GameObject {
     this.stepTxtLabel.string = "";
     this.scheduleOnce(async () => await this.onBalanceRefreshed(), 1);
     this.schedule(() => (this._clickable = true), 2);
+  }
+
+  private countdownRollWaitTime() {
+    const game = gameData.currentGame;
+    if (!game || !game.me) {
+      return;
+    }
+    this.waitingTimeLeft =
+      parseInt((new Date().getTime() / 1000).toString()) - game.me.lastOpTime;
   }
 
   private startStepUpdate() {
@@ -199,11 +225,6 @@ export class GameRoll extends GameObject {
 
     const isMyTurn = await gameData.currentGame.isMyTurn();
     if (!isMyTurn) {
-      console.log(
-        "上次移动",
-        gameData.currentGame.me.lastOpTime,
-        new Date().getTime() / 1000 - gameData.currentGame.me.lastOpTime
-      );
       Toast.showMessage("It's not your turn");
       return Promise.resolve();
     }
@@ -264,6 +285,28 @@ export class GameRoll extends GameObject {
     this.rollButtonStatus = player.status;
   }
 
+  private async checkWhoseTurn() {
+    const game = gameData.currentGame;
+    if (!game || !game.isPlaying || !game.me) {
+      this.waitingTimeLeft = -1;
+      return Promise.resolve();
+    }
+
+    this.waitingTimeLeft =
+      parseInt((new Date().getTime() / 1000).toString()) - game.me.lastOpTime;
+  }
+
+  @OnEvent(GameEventContractAirVoyagePieceMoved.eventAsync)
+  private async onPieceMoved(
+    gameId: any,
+    player: string,
+    pieceIndex: any,
+    from: any,
+    to: any
+  ) {
+    await this.checkWhoseTurn();
+  }
+
   @OnEvent(GameEventWalletConnected.eventAsync)
   private async onWalletConnected() {
     if (StringUtil.isEmpty(gameAccountData.address)) {
@@ -275,17 +318,20 @@ export class GameRoll extends GameObject {
   @OnEvent(GameEventGameOpened.eventAsync)
   private async onGameOpened() {
     await this.refreshRollButtonStatus();
+    await this.checkWhoseTurn();
     this.step = 0;
   }
 
   @OnEvent(GameEventContractAirVoyageGameStarted.eventAsync)
   private async onGameStarted() {
     await this.refreshRollButtonStatus();
+    await this.checkWhoseTurn();
   }
 
   @OnEvent(GameEventContractAirVoyageGameJoined.eventAsync)
   private async onGameJoined() {
     await this.refreshRollButtonStatus();
+    await this.checkWhoseTurn();
   }
 
   @OnEvent(GameEventContractGameBonusSystemDeposit.eventAsync)
