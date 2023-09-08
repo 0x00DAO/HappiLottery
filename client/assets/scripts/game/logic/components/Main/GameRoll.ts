@@ -168,17 +168,15 @@ export class GameRoll extends GameObject {
           Toast.showMessage("Deposit failed");
           return Promise.resolve();
         }
-        const toast = await Toast.showMessage(
-          "Waiting find or create game...",
-          true
-        );
+        Toast.showLoading("Waiting find or create game...");
         await gameData.findOrNewGame();
-        toast && toast.close();
+        Toast.closeLoading();
       } else {
         // the player is in a game now, just join it, refresh game
         await gameData.startGame(player.gameId);
       }
     } catch (e) {
+      Toast.closeLoading();
       Toast.showMessage("Join game failed");
       console.error(e);
     }
