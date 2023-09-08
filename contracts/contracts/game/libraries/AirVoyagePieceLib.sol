@@ -200,5 +200,9 @@ library AirVoyagePieceLib {
         if (nextLocalPosition == MAX_LOCAL_POSITION - 1) {
             setFinished(piece);
         }
+        // If the piece reaches the end(range from MAX_LOCAL_POSITION - 1 to MAX_LOCAL_POSITION - 2), set isFinished to true
+        if (nextLocalPosition == MAX_LOCAL_POSITION - 2) {
+            setFinished(piece);
+        }
     }
 }
