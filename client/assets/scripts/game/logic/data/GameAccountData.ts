@@ -13,6 +13,8 @@ import { Toast } from "../components/Toast/Toast";
 import { eventBus } from "../../core/event/EventBus";
 import { GameEventBuildArcadeAccount } from "../events/GameEventBuildArcadeAccount";
 import { GameEventWalletAccountChanged } from "../events/GameEventWalletAccountChanged";
+import { gameData } from "./GameData";
+import { GameEventWithdrawArcadeAccount } from "../events/GameEventWithdrawArcadeAccount";
 const { ethers } = ethersLib;
 interface IAccountCache {
   address: string;
@@ -132,9 +134,28 @@ export class GameAccountData extends DataModelBase {
   }
 
   public async withdraw() {
-    if (StringUtil.isEmpty(gameAccountData.address)) {
-      return Promise.resolve();
+    if (StringUtil.isEmpty(this.address)) {
+      return Promise.reject("invalid address");
     }
+
+    const balance = await walletData.provider.getBalance(this.address);
+    const withdrawAmount = balance.sub(
+      ethers.utils.parseEther(`${gameData.stakeToken}`)
+    );
+
+    if (withdrawAmount.lt(ethers.utils.parseEther("0"))) {
+      return Promise.reject("balance not enough.");
+    }
+
+    const tx = {
+      to: walletData.address,
+      value: withdrawAmount,
+    };
+    const signer = new ethers.Wallet(this.secret, walletData.provider);
+    const response = await signer.sendTransaction(tx);
+    await response.wait();
+
+    eventBus.emit(GameEventWithdrawArcadeAccount.event);
   }
 }
 export const gameAccountData: Readonly<GameAccountData> =

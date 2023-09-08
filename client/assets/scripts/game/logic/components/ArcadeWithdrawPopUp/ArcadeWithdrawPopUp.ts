@@ -78,10 +78,14 @@ export class ArcadeWithdrawPopUp extends LayoutCom {
   private async onWithdraw() {
     this.onClose();
     try {
+      Toast.showLoading("Withdrawing...");
       await gameAccountData.withdraw();
+      Toast.closeLoading();
       Toast.showMessage(`Withdraw success!`);
     } catch (e) {
-      Toast.showMessage("Withdraw failed");
+      Toast.closeLoading();
+      console.log(e);
+      Toast.showMessage("Withdraw failed.");
     }
   }
 

@@ -23,6 +23,7 @@ import { GasRecharge } from "../GasRecharge/GasRecharge";
 import { Toast } from "../Toast/Toast";
 import { GameEventBuildArcadeAccount } from "../../events/GameEventBuildArcadeAccount";
 import { GameEventContractAirVoyagePieceMoved } from "../../contracts/events/GameEventContractAirVoyagePieceMoved";
+import { GameEventWithdrawArcadeAccount } from "../../events/GameEventWithdrawArcadeAccount";
 const { menu, ccclass, property } = _decorator;
 
 @ccclass("GameRoll")
@@ -272,6 +273,11 @@ export class GameRoll extends GameObject {
 
   @OnEvent(GameEventBuildArcadeAccount.event)
   private async onArcadeAccountBuilded() {
+    await this.findAccountBalance();
+  }
+
+  @OnEvent(GameEventWithdrawArcadeAccount.event)
+  private async onArcadeAccountRefreshed() {
     await this.findAccountBalance();
   }
 
