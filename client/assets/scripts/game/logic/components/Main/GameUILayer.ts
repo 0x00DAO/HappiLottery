@@ -11,6 +11,7 @@ import { GameEventGameOpened } from "../../events/GameEventGameOpened";
 import { gameData } from "../../data/GameData";
 import { contractData } from "../../data/ContractData";
 import { Toast } from "../Toast/Toast";
+import { ArcadeWithdrawPopUp } from "../ArcadeWithdrawPopUp/ArcadeWithdrawPopUp";
 
 const { menu, ccclass, property } = _decorator;
 @ccclass("GameUILayer")
@@ -45,16 +46,14 @@ export class GameUILayer extends GameObject {
   }
 
   private setArcadeAccount() {
-    this.arcadeAccountLabel.string = `arcade account: ${StringUtil.shortAddress(
-      gameAccountData.address as string,
-      6
-    )}`;
+    this.arcadeAccountLabel.string = `arcade account: ${
+      gameAccountData.address as string
+    }`;
   }
 
   private onCopyArcadeAccount() {
     if (gameAccountData.address && gameAccountData.address.length > 0) {
-      StringUtil.copyString(gameAccountData.address as string);
-      Toast.showMessage("Copied!");
+      ArcadeWithdrawPopUp.showPopUp();
     }
   }
 
