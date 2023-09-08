@@ -52,12 +52,12 @@ export class GameRoll extends GameObject {
     this.waitingTimeLeftLabel.node.active = time >= 0;
     this.unschedule(this.countdownRollWaitTime);
     if (this.waitingTimeLeftLabel.node.active) {
-      if (time > TIME_INTERVAL_BETWEEN_ROLL) {
+      if (time === 0) {
         this.waitingTimeLeftLabel.string = "It's your turn!";
+        this.txtLabel.string = "Roll";
       } else {
-        this.waitingTimeLeftLabel.string = `wait: ${StringUtil.formatTime(
-          time
-        )}`;
+        this.txtLabel.string = "Waiting";
+        this.waitingTimeLeftLabel.string = `waiting for other player roll: ${time}`;
         this.schedule(this.countdownRollWaitTime, 1);
       }
     }
@@ -73,7 +73,7 @@ export class GameRoll extends GameObject {
     if (gameData.currentGame && gameData.currentGame.hasStarted) {
       if (gameData.currentGame.me) {
         this.txtLabel.string =
-          GamePlayerStatus.Playing === value ? "Roll" : "Wait";
+          GamePlayerStatus.Playing === value ? "Roll" : "Waiting";
       } else {
         this.txtLabel.string = "Join";
       }
@@ -98,8 +98,11 @@ export class GameRoll extends GameObject {
     if (!game || !game.me) {
       return;
     }
-    this.waitingTimeLeft =
-      parseInt((new Date().getTime() / 1000).toString()) - game.me.lastOpTime;
+    const lastTime =
+      game.me.lastOpTime +
+      TIME_INTERVAL_BETWEEN_ROLL -
+      parseInt((new Date().getTime() / 1000).toString());
+    this.waitingTimeLeft = Math.max(lastTime, 0);
   }
 
   private startStepUpdate() {
@@ -184,7 +187,7 @@ export class GameRoll extends GameObject {
     const balance = await walletData.provider.getBalance(
       gameAccountData.address
     );
-    const minGameFee = gameData.minGameFeePerRound;
+    const minGameFee = gameData.walletMinFee;
     let depositComplete = true;
 
     if (balance.lt(minGameFee)) {
@@ -297,8 +300,16 @@ export class GameRoll extends GameObject {
       return Promise.resolve();
     }
 
-    this.waitingTimeLeft =
-      parseInt((new Date().getTime() / 1000).toString()) - game.me.lastOpTime;
+    const isMyTurn = await game.isMyTurn();
+    if (isMyTurn) {
+      this.waitingTimeLeft = -1;
+      this.txtLabel.string = "Roll";
+    } else {
+      this.waitingTimeLeft =
+        game.me.lastOpTime +
+        TIME_INTERVAL_BETWEEN_ROLL -
+        parseInt((new Date().getTime() / 1000).toString());
+    }
   }
 
   @OnEvent(GameEventContractAirVoyagePieceMoved.eventAsync)

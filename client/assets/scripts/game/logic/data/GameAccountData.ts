@@ -114,10 +114,10 @@ export class GameAccountData extends DataModelBase {
   public async getBonus(): Promise<any> {
     let bonus = ethers.utils.parseEther("0");
     try {
-      bonus = await contractData.airVoyageGameViewSystemContract.getBonus(
-        this.address
-      );
-    } catch (e) {}
+      bonus = await contractData.airVoyageGameBonusSystemContract.getBonus();
+    } catch (e) {
+      console.log("e", e);
+    }
 
     return bonus;
   }
@@ -127,7 +127,7 @@ export class GameAccountData extends DataModelBase {
     if (amount.lte(ethers.utils.parseEther("0"))) {
       return Promise.reject();
     }
-    await contractData.airVoyageGameViewSystemContract.rewardBonus();
+    await contractData.airVoyageGameBonusSystemContract.rewardBonus();
     return amount;
   }
 }

@@ -9,6 +9,7 @@ import { ViewUtil } from "../../../core/utils/ViewUtil";
 import { Textures } from "../../enum/Textures";
 import { GameEventGameOpened } from "../../events/GameEventGameOpened";
 import { gameData } from "../../data/GameData";
+import { contractData } from "../../data/ContractData";
 
 const { menu, ccclass, property } = _decorator;
 @ccclass("GameUILayer")
@@ -26,6 +27,9 @@ export class GameUILayer extends GameObject {
   @property(Label)
   private gameIdLabel: Label = null!;
 
+  @property(Label)
+  private contractAddress: Label = null!;
+
   static prefabName(): string {
     return "GameUILayer";
   }
@@ -36,6 +40,7 @@ export class GameUILayer extends GameObject {
     } else {
       this.arcadeAccountLabel.string = "";
     }
+    this.contractAddress.string = `Contract Address: ${contractData.contractAddress.AirVoyage}`;
   }
 
   private setArcadeAccount() {
@@ -43,6 +48,7 @@ export class GameUILayer extends GameObject {
       gameAccountData.address as string,
       6
     )}`;
+    console.log("arcade account: ", gameAccountData.address);
   }
 
   @OnEvent(GameEventBuildArcadeAccount.event)

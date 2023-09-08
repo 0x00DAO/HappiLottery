@@ -39,6 +39,10 @@ export class GameData extends DataModelBase {
     return ethers.utils.parseEther(`${this.stakeToken * 200}`);
   }
 
+  public get walletMinFee(): any {
+    return ethers.utils.parseEther(`${this.stakeToken * 4}`);
+  }
+
   public get gameMap(): GameMap {
     return this._gameMap!;
   }
