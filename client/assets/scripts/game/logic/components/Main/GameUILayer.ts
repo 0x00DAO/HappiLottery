@@ -71,7 +71,7 @@ export class GameUILayer extends GameObject {
       return Promise.resolve();
     }
 
-    this.gameIdLabel.string = account.gameId.toString();
+    this.gameIdLabel.string = `Current Game: ${account.gameId.toString()}`;
     const seatIndex = account.seatIndex;
     const planeTex = `airplane_${seatIndex}`;
 

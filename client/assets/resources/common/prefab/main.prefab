@@ -1820,7 +1820,7 @@
         "__id__": 93
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 99
@@ -2346,6 +2346,9 @@
     },
     "factionSp": {
       "__id__": 90
+    },
+    "gameIdLabel": {
+      "__id__": 96
     },
     "_id": ""
   },
