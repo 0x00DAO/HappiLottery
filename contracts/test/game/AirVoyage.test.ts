@@ -274,7 +274,7 @@ describe('AirVoyage', function () {
       }
     });
 
-    it.only('should roll dice and move to finish', async function () {
+    it('should roll dice and move to finish', async function () {
       const [owner, addr1, addr2] = await ethers.getSigners();
 
       function getSignerByAddress(address: string): SignerWithAddress {

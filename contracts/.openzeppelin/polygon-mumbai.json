@@ -5491,7 +5491,7 @@
             "label": "componentType",
             "offset": 0,
             "slot": "351",
-            "type": "t_enum(ComponentType)4094",
+            "type": "t_enum(ComponentType)5294",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:13"
           },
@@ -5499,7 +5499,7 @@
             "label": "root",
             "offset": 1,
             "slot": "351",
-            "type": "t_contract(IRoot)4230",
+            "type": "t_contract(IRoot)5430",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:14"
           },
@@ -5547,7 +5547,7 @@
             "label": "games",
             "offset": 0,
             "slot": "501",
-            "type": "t_mapping(t_uint256,t_struct(Game)6600_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Game)7800_storage)",
             "contract": "AirVoyage",
             "src": "contracts/game/AirVoyage.sol:127"
           },
@@ -5555,7 +5555,7 @@
             "label": "players",
             "offset": 0,
             "slot": "502",
-            "type": "t_mapping(t_address,t_struct(Player)4524_storage)",
+            "type": "t_mapping(t_address,t_struct(Player)5724_storage)",
             "contract": "AirVoyage",
             "src": "contracts/game/AirVoyage.sol:129"
           },
@@ -5577,11 +5577,11 @@
             "label": "bytes32[]",
             "numberOfBytes": "32"
           },
-          "t_array(t_struct(GamePlayer)7012_storage)4_storage": {
+          "t_array(t_struct(GamePlayer)8711_storage)4_storage": {
             "label": "struct AirVoyageGamePlayer.GamePlayer[4]",
             "numberOfBytes": "384"
           },
-          "t_array(t_struct(Piece)7163_storage)4_storage": {
+          "t_array(t_struct(Piece)8862_storage)4_storage": {
             "label": "struct AirVoyagePieceLib.Piece[4]",
             "numberOfBytes": "128"
           },
@@ -5601,11 +5601,11 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(IRoot)4230": {
+          "t_contract(IRoot)5430": {
             "label": "contract IRoot",
             "numberOfBytes": "20"
           },
-          "t_enum(ComponentType)4094": {
+          "t_enum(ComponentType)5294": {
             "label": "enum LibComponentType.ComponentType",
             "members": [
               "Component",
@@ -5613,7 +5613,7 @@
             ],
             "numberOfBytes": "1"
           },
-          "t_enum(GamePlayerStatus)7000": {
+          "t_enum(GamePlayerStatus)8699": {
             "label": "enum AirVoyageGamePlayer.GamePlayerStatus",
             "members": [
               "Idle",
@@ -5623,7 +5623,7 @@
             ],
             "numberOfBytes": "1"
           },
-          "t_enum(GameStatus)6574": {
+          "t_enum(GameStatus)7774": {
             "label": "enum AirVoyageGameLib.GameStatus",
             "members": [
               "Idle",
@@ -5633,7 +5633,7 @@
             ],
             "numberOfBytes": "1"
           },
-          "t_enum(PieceStatus)7151": {
+          "t_enum(PieceStatus)8850": {
             "label": "enum AirVoyagePieceLib.PieceStatus",
             "members": [
               "Idle",
@@ -5646,7 +5646,7 @@
             "label": "mapping(address => bool)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_address,t_struct(Player)4524_storage)": {
+          "t_mapping(t_address,t_struct(Player)5724_storage)": {
             "label": "mapping(address => struct AirVoyage.Player)",
             "numberOfBytes": "32"
           },
@@ -5658,7 +5658,7 @@
             "label": "mapping(bytes32 => uint256)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_uint256,t_struct(Game)6600_storage)": {
+          "t_mapping(t_uint256,t_struct(Game)7800_storage)": {
             "label": "mapping(uint256 => struct AirVoyageGameLib.Game)",
             "numberOfBytes": "32"
           },
@@ -5674,7 +5674,7 @@
             ],
             "numberOfBytes": "32"
           },
-          "t_struct(Game)6600_storage": {
+          "t_struct(Game)7800_storage": {
             "label": "struct AirVoyageGameLib.Game",
             "members": [
               {
@@ -5691,13 +5691,13 @@
               },
               {
                 "label": "players",
-                "type": "t_array(t_struct(GamePlayer)7012_storage)4_storage",
+                "type": "t_array(t_struct(GamePlayer)8711_storage)4_storage",
                 "offset": 0,
                 "slot": "2"
               },
               {
                 "label": "pieces",
-                "type": "t_array(t_struct(Piece)7163_storage)4_storage",
+                "type": "t_array(t_struct(Piece)8862_storage)4_storage",
                 "offset": 0,
                 "slot": "14"
               },
@@ -5715,7 +5715,7 @@
               },
               {
                 "label": "status",
-                "type": "t_enum(GameStatus)6574",
+                "type": "t_enum(GameStatus)7774",
                 "offset": 20,
                 "slot": "19"
               },
@@ -5728,7 +5728,7 @@
             ],
             "numberOfBytes": "672"
           },
-          "t_struct(GamePlayer)7012_storage": {
+          "t_struct(GamePlayer)8711_storage": {
             "label": "struct AirVoyageGamePlayer.GamePlayer",
             "members": [
               {
@@ -5745,7 +5745,7 @@
               },
               {
                 "label": "status",
-                "type": "t_enum(GamePlayerStatus)7000",
+                "type": "t_enum(GamePlayerStatus)8699",
                 "offset": 21,
                 "slot": "0"
               },
@@ -5764,7 +5764,7 @@
             ],
             "numberOfBytes": "96"
           },
-          "t_struct(Piece)7163_storage": {
+          "t_struct(Piece)8862_storage": {
             "label": "struct AirVoyagePieceLib.Piece",
             "members": [
               {
@@ -5793,14 +5793,14 @@
               },
               {
                 "label": "status",
-                "type": "t_enum(PieceStatus)7151",
+                "type": "t_enum(PieceStatus)8850",
                 "offset": 25,
                 "slot": "0"
               }
             ],
             "numberOfBytes": "32"
           },
-          "t_struct(Player)4524_storage": {
+          "t_struct(Player)5724_storage": {
             "label": "struct AirVoyage.Player",
             "members": [
               {
