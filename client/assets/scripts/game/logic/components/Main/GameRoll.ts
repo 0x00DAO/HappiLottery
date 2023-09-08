@@ -50,12 +50,13 @@ export class GameRoll extends GameObject {
 
   private set waitingTimeLeft(time: number) {
     this.waitingTimeLeftLabel.node.active = time >= 0;
-    console.log("time", time);
     this.unschedule(this.countdownRollWaitTime);
     if (this.waitingTimeLeftLabel.node.active) {
       if (time === 0) {
         this.waitingTimeLeftLabel.string = "It's your turn!";
+        this.txtLabel.string = "Roll";
       } else {
+        this.txtLabel.string = "Waiting";
         this.waitingTimeLeftLabel.string = `waiting for other player roll: ${time}`;
         this.schedule(this.countdownRollWaitTime, 1);
       }
@@ -72,7 +73,7 @@ export class GameRoll extends GameObject {
     if (gameData.currentGame && gameData.currentGame.hasStarted) {
       if (gameData.currentGame.me) {
         this.txtLabel.string =
-          GamePlayerStatus.Playing === value ? "Roll" : "Wait";
+          GamePlayerStatus.Playing === value ? "Roll" : "Waiting";
       } else {
         this.txtLabel.string = "Join";
       }
