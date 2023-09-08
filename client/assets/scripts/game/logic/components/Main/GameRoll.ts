@@ -187,7 +187,7 @@ export class GameRoll extends GameObject {
     const balance = await walletData.provider.getBalance(
       gameAccountData.address
     );
-    const minGameFee = gameData.minGameFeePerRound;
+    const minGameFee = gameData.walletMinFee;
     let depositComplete = true;
 
     if (balance.lt(minGameFee)) {
