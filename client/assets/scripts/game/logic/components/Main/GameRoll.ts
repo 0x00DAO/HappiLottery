@@ -300,10 +300,16 @@ export class GameRoll extends GameObject {
       return Promise.resolve();
     }
 
-    this.waitingTimeLeft =
-      game.me.lastOpTime +
-      TIME_INTERVAL_BETWEEN_ROLL -
-      parseInt((new Date().getTime() / 1000).toString());
+    const isMyTurn = await game.isMyTurn();
+    if (isMyTurn) {
+      this.waitingTimeLeft = -1;
+      this.txtLabel.string = "Roll";
+    } else {
+      this.waitingTimeLeft =
+        game.me.lastOpTime +
+        TIME_INTERVAL_BETWEEN_ROLL -
+        parseInt((new Date().getTime() / 1000).toString());
+    }
   }
 
   @OnEvent(GameEventContractAirVoyagePieceMoved.eventAsync)
