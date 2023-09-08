@@ -8,6 +8,8 @@ import { LayoutCom } from "../../layout/LayoutCom";
 import { registerLayout } from "../GameUI";
 import { onAddedPromise } from "../../../core/layout/LayerHelper";
 import { Toast } from "../Toast/Toast";
+import { eventBus } from "../../../core/event/EventBus.js";
+import { GameEventRefreshArcadeAccount } from "../../events/GameEventRefreshArcadeAccount.js";
 
 const { menu, ccclass, property } = _decorator;
 const { ethers } = ethersLib;
@@ -76,6 +78,8 @@ export class BonusPopUp extends LayoutCom {
       Toast.showMessage(
         `Reward ${Number(ethers.utils.formatEther(amount)).toFixed(5)} Matic`
       );
+
+      eventBus.emit(GameEventRefreshArcadeAccount.event);
     } catch (e) {
       Toast.showMessage("Reward failed");
     }

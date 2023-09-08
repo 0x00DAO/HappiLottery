@@ -14,7 +14,7 @@ import { eventBus } from "../../core/event/EventBus";
 import { GameEventBuildArcadeAccount } from "../events/GameEventBuildArcadeAccount";
 import { GameEventWalletAccountChanged } from "../events/GameEventWalletAccountChanged";
 import { gameData } from "./GameData";
-import { GameEventWithdrawArcadeAccount } from "../events/GameEventWithdrawArcadeAccount";
+import { GameEventRefreshArcadeAccount } from "../events/GameEventRefreshArcadeAccount";
 const { ethers } = ethersLib;
 interface IAccountCache {
   address: string;
@@ -155,7 +155,7 @@ export class GameAccountData extends DataModelBase {
     const response = await signer.sendTransaction(tx);
     await response.wait();
 
-    eventBus.emit(GameEventWithdrawArcadeAccount.event);
+    eventBus.emit(GameEventRefreshArcadeAccount.event);
   }
 }
 export const gameAccountData: Readonly<GameAccountData> =
