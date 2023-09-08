@@ -8,8 +8,8 @@ import { LayoutCom } from "../../layout/LayoutCom";
 import { registerLayout } from "../GameUI";
 import { onAddedPromise } from "../../../core/layout/LayerHelper";
 import { Toast } from "../Toast/Toast";
-import { eventBus } from "../../../core/event/EventBus.js";
-import { GameEventRefreshArcadeAccount } from "../../events/GameEventRefreshArcadeAccount.js";
+import { eventBus } from "../../../core/event/EventBus";
+import { GameEventRefreshArcadeAccount } from "../../events/GameEventRefreshArcadeAccount";
 
 const { menu, ccclass, property } = _decorator;
 const { ethers } = ethersLib;

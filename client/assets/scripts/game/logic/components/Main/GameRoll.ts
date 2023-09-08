@@ -385,5 +385,7 @@ export class GameRoll extends GameObject {
   private async onGameFinished(gameId: any, winner: string) {
     this.step = 0;
     this.rollButtonStatus = GamePlayerStatus.Idle;
+    this.stepTxtLabel.string = "";
+    this.stopStepUpdate();
   }
 }
