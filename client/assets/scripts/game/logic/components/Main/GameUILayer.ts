@@ -49,7 +49,6 @@ export class GameUILayer extends GameObject {
       gameAccountData.address as string,
       6
     )}`;
-    console.log("arcade account: ", gameAccountData.address);
   }
 
   private onCopyArcadeAccount() {
@@ -57,6 +56,11 @@ export class GameUILayer extends GameObject {
       StringUtil.copyString(gameAccountData.address as string);
       Toast.showMessage("Copied!");
     }
+  }
+
+  private onCopyContractAddr() {
+    StringUtil.copyString(contractData.contractAddress.AirVoyage);
+    Toast.showMessage("Copied!");
   }
 
   @OnEvent(GameEventBuildArcadeAccount.event)

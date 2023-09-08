@@ -24,23 +24,23 @@
         "__id__": 6
       },
       {
-        "__id__": 116
+        "__id__": 119
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 122
+        "__id__": 125
       },
       {
-        "__id__": 124
+        "__id__": 127
       },
       {
-        "__id__": 126
+        "__id__": 129
       }
     ],
     "_prefab": {
-      "__id__": 128
+      "__id__": 131
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -193,14 +193,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 111
+        "__id__": 114
       },
       {
-        "__id__": 113
+        "__id__": 116
       }
     ],
     "_prefab": {
-      "__id__": 115
+      "__id__": 118
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2390,10 +2390,13 @@
       },
       {
         "__id__": 108
+      },
+      {
+        "__id__": 110
       }
     ],
     "_prefab": {
-      "__id__": 110
+      "__id__": 113
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2496,6 +2499,75 @@
     "fileId": "4fKhi92xlDCKftK70JlHcV"
   },
   {
+    "__type__": "cc.Button",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 105
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 111
+    },
+    "clickEvents": [
+      {
+        "__id__": 112
+      }
+    ],
+    "_interactable": true,
+    "_transition": 0,
+    "_normalColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_hoverColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "_pressedColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_disabledColor": {
+      "__type__": "cc.Color",
+      "r": 124,
+      "g": 124,
+      "b": 124,
+      "a": 255
+    },
+    "_normalSprite": null,
+    "_hoverSprite": null,
+    "_pressedSprite": null,
+    "_disabledSprite": null,
+    "_duration": 0.1,
+    "_zoomScale": 1.2,
+    "_target": null,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "a5hrQU7b9Lb4fMTwWYsxrr"
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 6
+    },
+    "component": "",
+    "_componentId": "d71e9XHbcJE14tIZfVNyG7b",
+    "handler": "onCopyContractAddr",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -2517,7 +2589,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 112
+      "__id__": 115
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2544,7 +2616,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 114
+      "__id__": 117
     },
     "arcadeAccountLabel": {
       "__id__": 77
@@ -2591,14 +2663,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 117
+        "__id__": 120
       },
       {
-        "__id__": 119
+        "__id__": 122
       }
     ],
     "_prefab": {
-      "__id__": 121
+      "__id__": 124
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2634,11 +2706,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 116
+      "__id__": 119
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 118
+      "__id__": 121
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2661,11 +2733,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 116
+      "__id__": 119
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 120
+      "__id__": 123
     },
     "_customMaterial": null,
     "_srcBlendFactor": 2,
@@ -2722,7 +2794,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 123
+      "__id__": 126
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2749,13 +2821,13 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 125
+      "__id__": 128
     },
     "mapNode": {
       "__id__": 2
     },
     "versionLabel": {
-      "__id__": 119
+      "__id__": 122
     },
     "_id": ""
   },
@@ -2772,7 +2844,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 127
+      "__id__": 130
     },
     "_id": ""
   },
