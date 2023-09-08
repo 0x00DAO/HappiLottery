@@ -6178,7 +6178,7 @@
             "label": "componentType",
             "offset": 0,
             "slot": "302",
-            "type": "t_enum(ComponentType)4094",
+            "type": "t_enum(ComponentType)5294",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:13"
           },
@@ -6186,7 +6186,7 @@
             "label": "root",
             "offset": 1,
             "slot": "302",
-            "type": "t_contract(IRoot)4230",
+            "type": "t_contract(IRoot)5430",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:14"
           },
@@ -6228,11 +6228,11 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(IRoot)4230": {
+          "t_contract(IRoot)5430": {
             "label": "contract IRoot",
             "numberOfBytes": "20"
           },
-          "t_enum(ComponentType)4094": {
+          "t_enum(ComponentType)5294": {
             "label": "enum LibComponentType.ComponentType",
             "members": [
               "Component",
