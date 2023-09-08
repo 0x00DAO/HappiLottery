@@ -10,6 +10,7 @@ import { Textures } from "../../enum/Textures";
 import { GameEventGameOpened } from "../../events/GameEventGameOpened";
 import { gameData } from "../../data/GameData";
 import { contractData } from "../../data/ContractData";
+import { Toast } from "../Toast/Toast";
 
 const { menu, ccclass, property } = _decorator;
 @ccclass("GameUILayer")
@@ -49,6 +50,13 @@ export class GameUILayer extends GameObject {
       6
     )}`;
     console.log("arcade account: ", gameAccountData.address);
+  }
+
+  private onCopyArcadeAccount() {
+    if (gameAccountData.address && gameAccountData.address.length > 0) {
+      StringUtil.copyString(gameAccountData.address as string);
+      Toast.showMessage("Copied!");
+    }
   }
 
   @OnEvent(GameEventBuildArcadeAccount.event)
