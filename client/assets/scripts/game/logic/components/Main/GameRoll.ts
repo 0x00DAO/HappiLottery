@@ -50,14 +50,13 @@ export class GameRoll extends GameObject {
 
   private set waitingTimeLeft(time: number) {
     this.waitingTimeLeftLabel.node.active = time >= 0;
+    console.log("time", time);
     this.unschedule(this.countdownRollWaitTime);
     if (this.waitingTimeLeftLabel.node.active) {
-      if (time > TIME_INTERVAL_BETWEEN_ROLL) {
+      if (time === 0) {
         this.waitingTimeLeftLabel.string = "It's your turn!";
       } else {
-        this.waitingTimeLeftLabel.string = `wait: ${StringUtil.formatTime(
-          time
-        )}`;
+        this.waitingTimeLeftLabel.string = `waiting for other player roll: ${time}`;
         this.schedule(this.countdownRollWaitTime, 1);
       }
     }
@@ -98,8 +97,11 @@ export class GameRoll extends GameObject {
     if (!game || !game.me) {
       return;
     }
-    this.waitingTimeLeft =
-      parseInt((new Date().getTime() / 1000).toString()) - game.me.lastOpTime;
+    const lastTime =
+      game.me.lastOpTime +
+      TIME_INTERVAL_BETWEEN_ROLL -
+      parseInt((new Date().getTime() / 1000).toString());
+    this.waitingTimeLeft = Math.max(lastTime, 0);
   }
 
   private startStepUpdate() {
@@ -298,7 +300,9 @@ export class GameRoll extends GameObject {
     }
 
     this.waitingTimeLeft =
-      parseInt((new Date().getTime() / 1000).toString()) - game.me.lastOpTime;
+      game.me.lastOpTime +
+      TIME_INTERVAL_BETWEEN_ROLL -
+      parseInt((new Date().getTime() / 1000).toString());
   }
 
   @OnEvent(GameEventContractAirVoyagePieceMoved.eventAsync)
