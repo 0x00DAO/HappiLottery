@@ -130,6 +130,12 @@ export class GameAccountData extends DataModelBase {
     await contractData.airVoyageGameBonusSystemContract.rewardBonus();
     return amount;
   }
+
+  public async withdraw() {
+    if (StringUtil.isEmpty(gameAccountData.address)) {
+      return Promise.resolve();
+    }
+  }
 }
 export const gameAccountData: Readonly<GameAccountData> =
   GameAccountData.getInstance();

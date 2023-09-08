@@ -905,8 +905,8 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "38ca7KmhCBPIpAQ4zjtgEv2",
-    "handler": "onRewardClicked",
+    "_componentId": "55f8c55JMdCQowlnPh12aYe",
+    "handler": "onWithdraw",
     "customEventData": ""
   },
   {

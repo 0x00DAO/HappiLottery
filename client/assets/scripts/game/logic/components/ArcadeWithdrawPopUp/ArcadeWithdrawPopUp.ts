@@ -75,19 +75,13 @@ export class ArcadeWithdrawPopUp extends LayoutCom {
   }
 
   @AutoLockedAsync
-  private async onRewardClicked() {
+  private async onWithdraw() {
     this.onClose();
-    if (StringUtil.isEmpty(gameAccountData.address)) {
-      return Promise.resolve();
-    }
-
     try {
-      const amount = await gameAccountData.winBonus();
-      Toast.showMessage(
-        `Reward ${Number(ethers.utils.formatEther(amount)).toFixed(5)} Matic`
-      );
+      await gameAccountData.withdraw();
+      Toast.showMessage(`Withdraw success!`);
     } catch (e) {
-      Toast.showMessage("Reward failed");
+      Toast.showMessage("Withdraw failed");
     }
   }
 
