@@ -5980,7 +5980,7 @@
             "label": "componentType",
             "offset": 0,
             "slot": "302",
-            "type": "t_enum(ComponentType)4094",
+            "type": "t_enum(ComponentType)5294",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:13"
           },
@@ -5988,7 +5988,7 @@
             "label": "root",
             "offset": 1,
             "slot": "302",
-            "type": "t_contract(IRoot)4230",
+            "type": "t_contract(IRoot)5430",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:14"
           },
@@ -6030,11 +6030,11 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(IRoot)4230": {
+          "t_contract(IRoot)5430": {
             "label": "contract IRoot",
             "numberOfBytes": "20"
           },
-          "t_enum(ComponentType)4094": {
+          "t_enum(ComponentType)5294": {
             "label": "enum LibComponentType.ComponentType",
             "members": [
               "Component",
@@ -6376,7 +6376,7 @@
             "label": "componentType",
             "offset": 0,
             "slot": "302",
-            "type": "t_enum(ComponentType)4094",
+            "type": "t_enum(ComponentType)5294",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:13"
           },
@@ -6384,7 +6384,7 @@
             "label": "root",
             "offset": 1,
             "slot": "302",
-            "type": "t_contract(IRoot)4230",
+            "type": "t_contract(IRoot)5430",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:14"
           },
@@ -6442,11 +6442,11 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(IRoot)4230": {
+          "t_contract(IRoot)5430": {
             "label": "contract IRoot",
             "numberOfBytes": "20"
           },
-          "t_enum(ComponentType)4094": {
+          "t_enum(ComponentType)5294": {
             "label": "enum LibComponentType.ComponentType",
             "members": [
               "Component",
@@ -6967,7 +6967,7 @@
             "label": "componentType",
             "offset": 0,
             "slot": "302",
-            "type": "t_enum(ComponentType)4094",
+            "type": "t_enum(ComponentType)5294",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:13"
           },
@@ -6975,7 +6975,7 @@
             "label": "root",
             "offset": 1,
             "slot": "302",
-            "type": "t_contract(IRoot)4230",
+            "type": "t_contract(IRoot)5430",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:14"
           },
@@ -7037,11 +7037,11 @@
             "label": "bytes",
             "numberOfBytes": "32"
           },
-          "t_contract(IRoot)4230": {
+          "t_contract(IRoot)5430": {
             "label": "contract IRoot",
             "numberOfBytes": "20"
           },
-          "t_enum(ComponentType)4094": {
+          "t_enum(ComponentType)5294": {
             "label": "enum LibComponentType.ComponentType",
             "members": [
               "Component",
@@ -7189,7 +7189,7 @@
             "label": "componentType",
             "offset": 0,
             "slot": "302",
-            "type": "t_enum(ComponentType)4094",
+            "type": "t_enum(ComponentType)5294",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:13"
           },
@@ -7197,7 +7197,7 @@
             "label": "root",
             "offset": 1,
             "slot": "302",
-            "type": "t_contract(IRoot)4230",
+            "type": "t_contract(IRoot)5430",
             "contract": "BaseComponent",
             "src": "contracts/core/game/BaseComponent.sol:14"
           },
@@ -7259,11 +7259,11 @@
             "label": "bytes",
             "numberOfBytes": "32"
           },
-          "t_contract(IRoot)4230": {
+          "t_contract(IRoot)5430": {
             "label": "contract IRoot",
             "numberOfBytes": "20"
           },
-          "t_enum(ComponentType)4094": {
+          "t_enum(ComponentType)5294": {
             "label": "enum LibComponentType.ComponentType",
             "members": [
               "Component",
@@ -7300,6 +7300,383 @@
               }
             ],
             "numberOfBytes": "64"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "76988b5a0c9ea1d8906bf3c2203e49f989dd8fca45b1fb8df0347726c24427ad": {
+      "address": "0x492D764F0049779D763DABaDA8AFF68A117a0f26",
+      "txHash": "0xd214f261dc54651c4994fb61209c29f8fb9d566ef68ea60efc8b8f1df4158306",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:63",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:68"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_paused",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_bool",
+            "contract": "PausableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol:29"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "PausableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol:116"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_roles",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_mapping(t_bytes32,t_struct(RoleData)34_storage)",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:62"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:260"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC1967UpgradeUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:169"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "251",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "UUPSUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:111"
+          },
+          {
+            "label": "id",
+            "offset": 0,
+            "slot": "301",
+            "type": "t_uint256",
+            "contract": "BaseComponent",
+            "src": "contracts/core/game/BaseComponent.sol:12"
+          },
+          {
+            "label": "componentType",
+            "offset": 0,
+            "slot": "302",
+            "type": "t_enum(ComponentType)5294",
+            "contract": "BaseComponent",
+            "src": "contracts/core/game/BaseComponent.sol:13"
+          },
+          {
+            "label": "root",
+            "offset": 1,
+            "slot": "302",
+            "type": "t_contract(IRoot)5430",
+            "contract": "BaseComponent",
+            "src": "contracts/core/game/BaseComponent.sol:14"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "303",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "BaseComponent",
+            "src": "contracts/core/game/BaseComponent.sol:41"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "352",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "Component",
+            "src": "contracts/core/game/Component.sol:48"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "401",
+            "type": "t_mapping(t_uint256,t_struct(Game)7800_storage)",
+            "contract": "AirVoyageGameEntity",
+            "src": "contracts/game/entities/AirVoyageGameEntity.sol:71"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_struct(GamePlayer)8711_storage)4_storage": {
+            "label": "struct AirVoyageGamePlayer.GamePlayer[4]",
+            "numberOfBytes": "384"
+          },
+          "t_array(t_struct(Piece)8862_storage)4_storage": {
+            "label": "struct AirVoyagePieceLib.Piece[4]",
+            "numberOfBytes": "128"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IRoot)5430": {
+            "label": "contract IRoot",
+            "numberOfBytes": "20"
+          },
+          "t_enum(ComponentType)5294": {
+            "label": "enum LibComponentType.ComponentType",
+            "members": [
+              "Component",
+              "System"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_enum(GamePlayerStatus)8699": {
+            "label": "enum AirVoyageGamePlayer.GamePlayerStatus",
+            "members": [
+              "Idle",
+              "Playing",
+              "Finished",
+              "Quit"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_enum(GameStatus)7774": {
+            "label": "enum AirVoyageGameLib.GameStatus",
+            "members": [
+              "Idle",
+              "Waiting",
+              "Playing",
+              "Finished"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_enum(PieceStatus)8850": {
+            "label": "enum AirVoyagePieceLib.PieceStatus",
+            "members": [
+              "Idle",
+              "Playing",
+              "Finished"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)34_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)7800_storage)": {
+            "label": "mapping(uint256 => struct AirVoyageGameLib.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)7800_storage": {
+            "label": "struct AirVoyageGameLib.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_struct(GamePlayer)8711_storage)4_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "pieces",
+                "type": "t_array(t_struct(Piece)8862_storage)4_storage",
+                "offset": 0,
+                "slot": "14"
+              },
+              {
+                "label": "currentPlayer",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "18"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "19"
+              },
+              {
+                "label": "status",
+                "type": "t_enum(GameStatus)7774",
+                "offset": 20,
+                "slot": "19"
+              },
+              {
+                "label": "currentPlayerLastOperationTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "20"
+              }
+            ],
+            "numberOfBytes": "672"
+          },
+          "t_struct(GamePlayer)8711_storage": {
+            "label": "struct AirVoyageGamePlayer.GamePlayer",
+            "members": [
+              {
+                "label": "addr",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "dice",
+                "type": "t_uint8",
+                "offset": 20,
+                "slot": "0"
+              },
+              {
+                "label": "status",
+                "type": "t_enum(GamePlayerStatus)8699",
+                "offset": 21,
+                "slot": "0"
+              },
+              {
+                "label": "score",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastOperationTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              }
+            ],
+            "numberOfBytes": "96"
+          },
+          "t_struct(Piece)8862_storage": {
+            "label": "struct AirVoyagePieceLib.Piece",
+            "members": [
+              {
+                "label": "player",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "seatIndex",
+                "type": "t_uint8",
+                "offset": 20,
+                "slot": "0"
+              },
+              {
+                "label": "localPosition",
+                "type": "t_uint16",
+                "offset": 21,
+                "slot": "0"
+              },
+              {
+                "label": "globalPosition",
+                "type": "t_uint16",
+                "offset": 23,
+                "slot": "0"
+              },
+              {
+                "label": "status",
+                "type": "t_enum(PieceStatus)8850",
+                "offset": 25,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(RoleData)34_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "members",
+                "type": "t_mapping(t_address,t_bool)",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_uint16": {
+            "label": "uint16",
+            "numberOfBytes": "2"
           },
           "t_uint256": {
             "label": "uint256",
