@@ -1,5 +1,8 @@
 import { Label, _decorator } from "cc";
-import { GamePlayerStatus } from "../../../const/GameConst";
+import {
+  GamePlayerStatus,
+  TIME_INTERVAL_BETWEEN_ROLL,
+} from "../../../const/GameConst";
 import { OnEvent } from "../../../core/event/decorators/OnEventDecorator";
 import { GameObject } from "../../../core/game/GameObject";
 import { AutoLockedAsync } from "../../../core/model/DataDecorators";
@@ -49,7 +52,7 @@ export class GameRoll extends GameObject {
     this.waitingTimeLeftLabel.node.active = time >= 0;
     this.unschedule(this.countdownRollWaitTime);
     if (this.waitingTimeLeftLabel.node.active) {
-      if (time > 60) {
+      if (time > TIME_INTERVAL_BETWEEN_ROLL) {
         this.waitingTimeLeftLabel.string = "It's your turn!";
       } else {
         this.waitingTimeLeftLabel.string = `wait: ${StringUtil.formatTime(

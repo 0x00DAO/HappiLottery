@@ -23,6 +23,9 @@ export class GameUILayer extends GameObject {
   @property(Sprite)
   private factionSp: Sprite = null!;
 
+  @property(Label)
+  private gameIdLabel: Label = null!;
+
   static prefabName(): string {
     return "GameUILayer";
   }
@@ -68,6 +71,7 @@ export class GameUILayer extends GameObject {
       return Promise.resolve();
     }
 
+    this.gameIdLabel.string = account.gameId.toString();
     const seatIndex = account.seatIndex;
     const planeTex = `airplane_${seatIndex}`;
 

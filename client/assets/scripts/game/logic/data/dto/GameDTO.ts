@@ -1,4 +1,7 @@
-import { GameStatus } from "../../../const/GameConst";
+import {
+  GameStatus,
+  TIME_INTERVAL_BETWEEN_ROLL,
+} from "../../../const/GameConst";
 import { BaseDTO } from "../../../core/model/BaseDTO";
 import { PropertyType } from "../../../core/model/DataDecorators";
 import { gameAccountData } from "../GameAccountData";
@@ -69,7 +72,7 @@ export class GameDTO extends BaseDTO {
     }
     const lastTime =
       parseInt((new Date().getTime() / 1000).toString()) - me.lastOpTime;
-    return lastTime > 60;
+    return lastTime > TIME_INTERVAL_BETWEEN_ROLL;
   }
 
   public destroyAllAirplanes() {
