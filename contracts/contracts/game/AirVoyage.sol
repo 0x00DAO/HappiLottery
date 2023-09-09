@@ -196,6 +196,7 @@ contract AirVoyage is
         address owner = _msgSender();
         getAirVoyageGameEntity().createGame(gameId, owner);
 
+        require(_waitingGames.length() == 0, "There are games waiting");
         // Add the game to the waiting list
         _waitingGames.add(gameId);
 
@@ -319,6 +320,10 @@ contract AirVoyage is
         address _player = _msgSender();
         // Get the game ID
         uint256 _gameId = players[_player].gameId;
+
+        // skip if the current player is timeout
+        bool skiped = getAirVoyageGameMoveSystem()
+            .turnToNextPlayerIfCurrentPlayerTimeout(_gameId, _player);
 
         // Roll the dice (1-6)
         uint8 _dice = uint8((randomByGameId(_gameId) % 6) + 1);

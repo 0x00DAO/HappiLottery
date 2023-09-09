@@ -15,14 +15,14 @@ interface ContractDeployAddressInterface {
 }
 
 const ContractDeployAddress_PolygonTestNet: ContractDeployAddressInterface = {
-  GameRoot: '0xED57fD92FC6575051C885e9F0F6716818aAeE4dB',
-  AirVoyage: '0xA5cC0422ef56e1e66A1B6100cD73061592B58b13',
-  AirVoyageGameViewSystem: '0xf5d1e1aFfD00894b26Be2A470dc4005ACE8974AC',
-  AirVoyageGameMoveSystem: '0xD6880B4761167Be4fD378248Dba345c9eE6FD93a',
-  AirVoyageGameBonusSystem: '0x84B7F92c0187eee470fd85028C15905BD2d4FcdF',
-  AirVoyageGameEntity: '0x77b9F07967065d43f8d374983f97eA0EaF0eAb72',
-  AirVoyageGameBonusEntity: '0xC563314A79B1FD99b251a3061A842387b8D7C200',
-  AirVoyageGameBonusSystemEntity: '0xE3E966B9073dAE30f87c50b7C6e759513A202c7e',
+  GameRoot: '0x8A725623389d835EfD812f8aFBC0f473728Ebb86',
+  AirVoyage: '0x4e312Ebb98306ABf7D2C50fFbBf7021FBFFf4E13',
+  AirVoyageGameViewSystem: '0x35F45aA48EF715571bbd0B07ed195405b8afE888',
+  AirVoyageGameMoveSystem: '0xE2710De9474d8724361a643DA6A5Dbe28793fac8',
+  AirVoyageGameBonusSystem: '0xC13B9eC6Bd31fDdd0DfB46137E32994e6Da82347',
+  AirVoyageGameEntity: '0x16AdBE7728BbcF494A64A0aCd63CB8e0328E8Df3',
+  AirVoyageGameBonusEntity: '0x70afc49e5D77786B5E91AaC8cE3A827Fb1feC029',
+  AirVoyageGameBonusSystemEntity: '0xA4E9E9d501FA72EF5f9be83aa9a1cA00c89E506C',
 };
 
 const ContractDeployAddress_PolygonMainNet: ContractDeployAddressInterface = {};

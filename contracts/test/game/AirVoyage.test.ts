@@ -144,6 +144,20 @@ describe('AirVoyage', function () {
         'You have already participated in the game'
       );
     });
+
+    it('should not create a new game if the game is not finished', async function () {
+      const [owner, addr1, addr2] = await ethers.getSigners();
+
+      await expect(airVoyageContract.createGame({ value: bonusValue }))
+        .to.emit(airVoyageContract, 'GameCreated')
+        .withArgs(initialGameId, owner.address);
+
+      const airVoyageContractB = airVoyageContract.connect(addr1);
+      // await airVoyageContractB.createGame({ value: bonusValue });
+      await expect(
+        airVoyageContractB.createGame({ value: bonusValue })
+      ).to.be.revertedWith('There are games waiting');
+    });
   });
 
   describe('joinGame', function () {
@@ -280,12 +294,25 @@ describe('AirVoyage', function () {
         .connect(addr1)
         .joinGame(initialGameId, { value: bonusValue });
 
+      let userLastOperationTime = 0;
       for (let i = 0; i < 500; i++) {
         const currentPlayer = await airVoyageGameViewSystem.getCurrentPlayer(
           initialGameId
         );
+        {
+          const game = await airVoyageGameViewSystem.getGame(initialGameId);
+          console.log(
+            `step: ${i}, currentPlayer: ${currentPlayer}, currentPlayerIndex:${game.currentPlayer}`
+          );
 
-        console.log(`step ${i} currentPlayer ${currentPlayer}`);
+          //check lastOperationTime
+          const gamePlayer = game.players[game.currentPlayer];
+          expect(gamePlayer.lastOperationTime).to.be.gt(userLastOperationTime);
+          userLastOperationTime = gamePlayer.lastOperationTime;
+          expect(game.currentPlayerLastOperationTime).to.be.eq(
+            userLastOperationTime
+          );
+        }
 
         const currentPlayerSigner = getSignerByAddress(currentPlayer);
         await expect(
@@ -330,6 +357,14 @@ describe('AirVoyage', function () {
       const reward = await airVoyageGameBonusSystemContract.bonusOf(
         game.winner
       );
+      const winnerSigner = getSignerByAddress(game.winner);
+      await airVoyageGameBonusSystemContract
+        .connect(winnerSigner)
+        .getBonus()
+        .then((v: any) => {
+          expect(v).to.equal(reward);
+        });
+
       await airVoyageGameBonusSystemContract
         .availableAmount()
         .then((v: BigNumber) => {
@@ -428,6 +463,75 @@ describe('AirVoyage', function () {
 
         expect(currentPlayerAfterRoll).to.not.equal(currentPlayer);
       }
+    });
+
+    it('should roll dice and move if timeout', async function () {
+      const [owner, addr1, addr2] = await ethers.getSigners();
+
+      await airVoyageContract.createGame({ value: bonusValue });
+      //join game
+      await airVoyageContract
+        .connect(addr1)
+        .joinGame(initialGameId, { value: bonusValue });
+
+      for (let i = 0; i < 4; i++) {
+        await airVoyageGameViewSystem
+          .getGamePiece(initialGameId, i)
+          .then((x: any) => {
+            // console.log(i, x);
+          });
+      }
+      const currentPlayer = await airVoyageGameViewSystem.getCurrentPlayer(
+        initialGameId
+      );
+      //snapshot
+      const snapshotId = await ethers.provider.send('evm_snapshot', []);
+
+      for (let i = 0; i < 4; i++) {
+        const currentPlayerSigner =
+          currentPlayer === owner.address ? owner : addr1;
+
+        const game = await airVoyageGameViewSystem.getGame(initialGameId);
+        console.log(
+          `step: ${i}, currentPlayer: ${currentPlayer}, currentPlayerIndex:${game.currentPlayer}`
+        );
+
+        await expect(
+          airVoyageContract.connect(currentPlayerSigner).rollDiceAndMovePiece(0)
+        )
+          .to.emit(airVoyageContract, 'DiceRolled')
+          .withArgs(
+            initialGameId,
+            currentPlayerSigner.address,
+            async (x: BigNumber) => console.log(x)
+          )
+          .to.emit(airVoyageContract, 'PieceMoved')
+          .withArgs(
+            initialGameId,
+            currentPlayerSigner.address,
+            async (x: any) => console.log(`pieceIndex ${x}`),
+            async (x: any) => console.log(`from ${x}`),
+            async (x: any) => console.log(`to ${x}`)
+          );
+
+        const isFinished = await airVoyageGameViewSystem.isGameFinished(
+          initialGameId
+        );
+        console.log('isFinished', isFinished);
+
+        const currentPlayerAfterRoll =
+          await airVoyageGameViewSystem.getCurrentPlayer(initialGameId);
+
+        expect(currentPlayerAfterRoll).to.not.equal(currentPlayer);
+
+        //block time add 120s
+        await ethers.provider.send('evm_increaseTime', [120]);
+        //mine
+        await ethers.provider.send('evm_mine', []);
+      }
+
+      //restore
+      await ethers.provider.send('evm_revert', [snapshotId]);
     });
   });
 });

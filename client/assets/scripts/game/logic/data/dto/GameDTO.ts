@@ -1,71 +1,89 @@
-import { GameStatus } from '../../../const/GameConst';
-import { BaseDTO } from '../../../core/model/BaseDTO';
-import { PropertyType } from '../../../core/model/DataDecorators';
-import { gameAccountData } from '../GameAccountData';
-import { gameData } from '../GameData';
-import { PieceDTO } from './PieceDTO';
-import { PlayerDTO } from './PlayerDTO';
+import {
+  GameStatus,
+  TIME_INTERVAL_BETWEEN_ROLL,
+} from "../../../const/GameConst";
+import { BaseDTO } from "../../../core/model/BaseDTO";
+import { PropertyType } from "../../../core/model/DataDecorators";
+import { gameAccountData } from "../GameAccountData";
+import { gameData } from "../GameData";
+import { PieceDTO } from "./PieceDTO";
+import { PlayerDTO } from "./PlayerDTO";
 
 export class GameDTO extends BaseDTO {
-    gameId: any = '';
-    owner: string = '';
+  gameId: any = "";
+  owner: string = "";
 
-    @PropertyType(PlayerDTO)
-    players: PlayerDTO[] = [];
+  @PropertyType(PlayerDTO)
+  players: PlayerDTO[] = [];
 
-    @PropertyType(PieceDTO)
-    pieces: PieceDTO[] = [];
+  @PropertyType(PieceDTO)
+  pieces: PieceDTO[] = [];
 
-    currentPlayer: any = '';
+  currentPlayer: any = "";
 
-    winner: string = '';
-    status: GameStatus = GameStatus.Idle;
+  winner: string = "";
+  status: GameStatus = GameStatus.Idle;
 
-    public get playersInGame(): PlayerDTO[] {
-        return this.players.filter((player: PlayerDTO) => player.isValid);
+  public get playersInGame(): PlayerDTO[] {
+    return this.players.filter((player: PlayerDTO) => player.isValid);
+  }
+
+  public get hasStarted(): boolean {
+    return this.status === GameStatus.Waiting || this.isPlaying;
+  }
+
+  public get isPlaying(): boolean {
+    return this.status === GameStatus.Playing;
+  }
+
+  public get me(): PlayerDTO | null {
+    return (
+      this.players.find(
+        (player: PlayerDTO) => player.addr === gameAccountData.address
+      ) ?? null
+    );
+  }
+
+  public get validPieces(): PieceDTO[] {
+    return this.pieces.filter((piece: PieceDTO) => piece.isValid);
+  }
+
+  public getPlayerByAddress(address: string): PlayerDTO | null {
+    return (
+      this.players.find((player: PlayerDTO) => player.addr === address) ?? null
+    );
+  }
+
+  public getPieceByIndex(index: number): PieceDTO | null {
+    return this.pieces.length > index ? this.pieces[index] : null;
+  }
+
+  public async isMyTurn(): Promise<boolean> {
+    const player = await gameData.getCurrentPlayer();
+    if (!player) {
+      return false;
     }
-
-    public get hasStarted(): boolean {
-        return this.status === GameStatus.Waiting || this.isPlaying;
+    if (player === gameAccountData.address) {
+      return true;
     }
-
-    public get isPlaying(): boolean {
-        return this.status === GameStatus.Playing;
+    const me = this.me;
+    if (!me) {
+      return false;
     }
+    const lastTime =
+      parseInt((new Date().getTime() / 1000).toString()) - me.lastOpTime;
+    return lastTime > TIME_INTERVAL_BETWEEN_ROLL;
+  }
 
-    public get me(): PlayerDTO | null {
-        return (
-            this.players.find((player: PlayerDTO) => player.addr === gameAccountData.address) ??
-            null
-        );
-    }
+  public destroyAllAirplanes() {
+    this.pieces.forEach((piece: PieceDTO) => piece.destroyAirplane());
+  }
 
-    public get validPieces(): PieceDTO[] {
-        return this.pieces.filter((piece: PieceDTO) => piece.isValid);
-    }
+  public initAllAirplanes() {
+    this.validPieces.forEach((piece: PieceDTO) => piece.gotoInitPosition());
+  }
 
-    public getPlayerByAddress(address: string): PlayerDTO | null {
-        return this.players.find((player: PlayerDTO) => player.addr === address) ?? null;
-    }
-
-    public getPieceByIndex(index: number): PieceDTO | null {
-        return this.pieces.length > index ? this.pieces[index] : null;
-    }
-
-    public async isMyTurn(): Promise<boolean> {
-        const player = await gameData.getCurrentPlayer();
-        return player !== null && player === gameAccountData.address;
-    }
-
-    public destroyAllAirplanes() {
-        this.pieces.forEach((piece: PieceDTO) => piece.destroyAirplane());
-    }
-
-    public initAllAirplanes() {
-        this.validPieces.forEach((piece: PieceDTO) => piece.gotoInitPosition());
-    }
-
-    public landedAllAirplanes() {
-        this.validPieces.forEach((piece: PieceDTO) => piece.landToAirport());
-    }
+  public landedAllAirplanes() {
+    this.validPieces.forEach((piece: PieceDTO) => piece.landToAirport());
+  }
 }

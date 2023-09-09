@@ -8,14 +8,14 @@ import {
   Prefab,
   warn,
   Widget,
-} from 'cc';
+} from "cc";
 import {
   CompleteCallback,
   ProgressCallback,
   resLoader,
-} from '../loader/ResLoader';
-import { UICallbacks, ViewParams } from './Defines';
-import { DelegateComponent } from './DelegateComponent';
+} from "../loader/ResLoader";
+import { UICallbacks, ViewParams } from "./Defines";
+import { DelegateComponent } from "./DelegateComponent";
 
 export class LayerUI extends Node {
   protected ui_nodes: Map<string, ViewParams> = new Map<string, ViewParams>();
@@ -36,7 +36,7 @@ export class LayerUI extends Node {
 
   public getUuid(prefabPath: string): string {
     var uuid = `${this.name}_${prefabPath}`;
-    return uuid.replace(/\//g, '_');
+    return uuid.replace(/\//g, "_");
   }
 
   add(prefabPath: string, params?: any, callbacks?: UICallbacks): string {
@@ -44,7 +44,7 @@ export class LayerUI extends Node {
     var viewParams = this.ui_nodes.get(uuid);
     if (viewParams && viewParams.valid) {
       warn(`prefab [${prefabPath}] loaded duplicated: ${uuid}`);
-      return '';
+      return "";
     }
 
     if (!viewParams) {
@@ -77,7 +77,6 @@ export class LayerUI extends Node {
           if (err) {
             error(err);
           }
-
           let childNode: Node = instantiate(res);
           viewParams.node = childNode;
 
