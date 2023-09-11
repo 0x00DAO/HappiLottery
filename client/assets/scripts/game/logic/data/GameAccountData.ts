@@ -58,7 +58,8 @@ export class GameAccountData extends DataModelBase {
 
   @OnEvent(GameEventWalletAccountChanged.event)
   private async onAccountChanged() {
-    await this.buildAccount(true);
+    this.onDisconnect();
+    window.location.reload();
   }
 
   public async getPlayerSimple(
