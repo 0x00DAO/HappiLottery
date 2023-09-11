@@ -42,7 +42,8 @@ export class GameUILayer extends GameObject {
     } else {
       this.arcadeAccountLabel.string = "";
     }
-    this.contractAddress.string = `Contract Address: ${contractData.contractAddress.AirVoyage}`;
+    // this.contractAddress.string = `Contract Address: ${contractData.contractAddress.AirVoyage}`;
+    this.contractAddress.string = `Contract Address: 0x4e312Ebb98306ABf7D2C50fFbBf7021FBFFf4E13`;
   }
 
   private setArcadeAccount() {

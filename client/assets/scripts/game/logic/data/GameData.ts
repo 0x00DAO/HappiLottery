@@ -93,10 +93,11 @@ export class GameData extends DataModelBase {
       // game id list
       const waitingList =
         await contractData.airVoyageContract.getWaitingGames();
-
+      console.log("game list", waitingList.length, waitingList);
       if (waitingList.length > 0) {
         await this.joinGame(waitingList[0]);
       } else {
+        console.log("nothing", waitingList);
         await this.createGame();
       }
     } catch (e) {

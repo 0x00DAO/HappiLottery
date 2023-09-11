@@ -194,7 +194,7 @@ export class GameRoll extends GameObject {
         "Recharge Matic for playing.",
         true
       );
-      const amount = minGameFee.sub(balance);
+      const amount = gameData.minGameFeePerRound.sub(balance);
       const transaction = {
         to: gameAccountData.address,
         value: amount,
